@@ -11,7 +11,7 @@ fun JokesList(modifier: Modifier = Modifier, content: List<JokeModel>) {
 
     LazyColumn(modifier = modifier) {
         items(content) {
-            JokeCard1(data = it) {
+            JokeCard(data = it) {
 
             }
         }

@@ -28,7 +28,7 @@ import com.toadfrogson.clownhub.data.model.JokeModel
 
 
 @Composable
-fun JokeCard1(
+fun JokeCard(
     modifier: Modifier = Modifier,
     data: JokeModel,
     isSelected: Boolean = false,
