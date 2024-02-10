@@ -1,4 +1,4 @@
-package com.example.compose
+package com.toadfrogson.clownhub.ui.theme
 
 import android.os.Build
 import androidx.compose.material3.MaterialTheme

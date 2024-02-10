@@ -7,8 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.example.compose.ClownHubTheme
 import com.toadfrogson.clownhub.app.screen.MainScreen
+import com.toadfrogson.clownhub.ui.theme.ClownHubTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

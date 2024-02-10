@@ -28,7 +28,6 @@ import org.koin.androidx.compose.koinViewModel
 fun MainScreen(viewModel: MainViewModel = koinViewModel(), onThemeSwitched: () -> Unit) {
 
     val snackbarHostState = remember { SnackbarHostState() }
-
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = { TopBar(onThemeSwitched = {
@@ -56,7 +55,5 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel(), onThemeSwitched: () -
                 JokesList(content = state.content)
             }
         }
-
-
     }
 }

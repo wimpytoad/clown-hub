@@ -1,5 +1,6 @@
 package com.toadfrogson.clownhub.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,16 +31,14 @@ import com.toadfrogson.clownhub.data.model.JokeModel
 @Composable
 fun JokeCard(
     modifier: Modifier = Modifier,
-    data: JokeModel,
-    isSelected: Boolean = false,
-    onSelected: (Boolean) -> Unit
+    data: JokeModel
 ) {
     var isSelected by remember { mutableStateOf(false) }
     Card(
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .clip(CardDefaults.shape)
-            .clickable { isSelected = true },
+            .clickable { isSelected = !isSelected },
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.surfaceVariant
@@ -88,6 +87,24 @@ fun JokeCard(
                 else MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
             )
+
+            AnimatedVisibility(isSelected) {
+                Column {
+                    Text(
+                        text = "Metadata of this joke if you are THAT interested: ",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.padding(top = 12.dp, bottom = 8.dp)
+                    )
+
+                    Text(
+                        text = data.metadata,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding()
+                    )
+                }
+            }
         }
     }
 }
