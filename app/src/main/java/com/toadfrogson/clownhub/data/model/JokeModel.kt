@@ -1,14 +1,24 @@
 package com.toadfrogson.clownhub.data.model
 
-data class JokeModel(val content: String, val category: String, val id: Int, val metadata: String) {
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
+import org.mongodb.kbson.ObjectId
+
+open class JokeModel : RealmObject {
+    @PrimaryKey
+    var dbId: ObjectId = ObjectId()
+    var content: String = ""
+    var category: String = ""
+    var id: Int = 0
+    var metadata: String = ""
     companion object {
         fun mapFromEntity(entity: JokeEntry) =
-            JokeModel(
-                content = entity.joke,
-                category = entity.category,
-                id = entity.id,
+            JokeModel().apply {
+                content = entity.joke
+                category = entity.category
+                id = entity.id
                 metadata = buildMetadata(entity)
-            )
+            }
 
         private fun buildMetadata(entity: JokeEntry) = buildString {
             append("joke id: ${entity.id}\n")

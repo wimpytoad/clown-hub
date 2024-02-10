@@ -1,5 +1,6 @@
 package com.toadfrogson.clownhub.data.network
 
+import com.toadfrogson.clownhub.data.model.response.ApiResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -16,14 +17,14 @@ import kotlinx.serialization.json.Json
 
 class WebClient {
 
-    suspend inline fun <reified T: Any> makeClientGet(filters: String) : Result<T> {
+    suspend inline fun <reified T: Any> makeClientGet(filters: String) : ApiResponse<T> {
         val url = BASE_URL + filters
         return try {
             val client = getWebClient()
             val response = client.get(url).body<T>()
-            Result.success(response)
+            ApiResponse.Success(response)
         } catch (e: Exception) {
-            Result.failure(e)
+            ApiResponse.Failure(e.message.orEmpty(), e)
         }
     }
 

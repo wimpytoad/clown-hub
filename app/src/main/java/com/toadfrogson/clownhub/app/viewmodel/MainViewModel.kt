@@ -3,6 +3,7 @@ package com.toadfrogson.clownhub.app.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.toadfrogson.clownhub.data.model.JokeModel
+import com.toadfrogson.clownhub.data.model.response.ApiResponse
 import com.toadfrogson.clownhub.data.repo.JokesRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -29,20 +30,21 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
         }
     }
 
-    suspend fun loadContent() {
+    private suspend fun loadContent() {
         _uiState.update {
             it.copy(isLoading = true)
         }
         val result = repo.fetchJokes()
 
-        if (result.isSuccess && result.getOrNull() != null) {
+        if (result is ApiResponse.Success) {
             _uiState.update {
-                it.copy(isLoading = false, content = result.getOrNull() ?: emptyList())
+                it.copy(isLoading = false, content = result.data.orEmpty())
             }
         } else {
             _uiEvents.emit(UiEvents.SnackbarEvent("Failed to Load", true))
         }
     }
+
 }
 
 sealed class UiEvents {

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "1.9.22"
+    id("io.realm.kotlin")
 }
 
 android {
@@ -54,6 +55,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 
     //Ui
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -78,7 +80,8 @@ dependencies {
     implementation("io.ktor:ktor-client-logging-jvm:2.2.3")
     implementation("io.ktor:ktor-client-content-negotiation:2.2.3")
 
-
+    //realm db
+    implementation("io.realm.kotlin:library-base:1.11.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
