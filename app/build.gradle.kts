@@ -64,6 +64,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
+
 
     //di
     implementation("io.insert-koin:koin-android:3.5.3")
