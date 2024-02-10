@@ -20,16 +20,13 @@ import com.toadfrogson.clownhub.app.viewmodel.UiEvents
 import com.toadfrogson.clownhub.ui.components.ClownLoader
 import com.toadfrogson.clownhub.ui.components.JokesList
 import com.toadfrogson.clownhub.ui.components.TopBar
-import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.compose.koinViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(viewModel: MainViewModel = koinViewModel(), onThemeSwitched: () -> Unit) {
-    LaunchedEffect(viewModel, Dispatchers.IO) {
-        viewModel.loadContent()
-    }
+
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
