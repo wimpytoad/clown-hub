@@ -2,6 +2,7 @@ package com.toadfrogson.clownhub.app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.toadfrogson.clownhub.app.model.JokeType
 import com.toadfrogson.clownhub.data.model.JokeModel
 import com.toadfrogson.clownhub.data.model.response.ApiResponse
 import com.toadfrogson.clownhub.data.repo.JokesRepo
@@ -15,7 +16,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class MainState(val isLoading: Boolean = false, val content: List<JokeModel> = emptyList())
+data class MainState(
+    val isLoading: Boolean = false,
+    val content: List<JokeModel> = emptyList(),
+    val selectedFilter: JokeType = JokeType.AllJokes
+)
 
 class MainViewModel(private val repo: JokesRepo) : ViewModel() {
     private val _uiState = MutableStateFlow(MainState())
@@ -23,6 +28,8 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
 
     private val _uiEvents = MutableSharedFlow<UiEvents>()
     val uiEvents: SharedFlow<UiEvents> = _uiEvents.asSharedFlow()
+
+    private val unfilteredContent = mutableListOf<JokeModel>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,16 +44,31 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
         val result = repo.fetchJokes()
 
         if (result is ApiResponse.Success) {
+            unfilteredContent.addAll(result.data.orEmpty())
             _uiState.update {
-                it.copy(isLoading = false, content = result.data.orEmpty())
+                it.copy(isLoading = false, content = unfilteredContent)
             }
         } else {
-            _uiEvents.emit(UiEvents.SnackbarEvent("Failed to Load", true))
+            _uiEvents.emit(UiEvents.SnackbarEvent("Failed to Load"))
+        }
+    }
+
+    fun filterContent(jokeType: JokeType) {
+        val filteredContent = if (jokeType.value.isEmpty()) unfilteredContent
+        else unfilteredContent.filter { it.category == jokeType.value }
+        _uiState.update {
+            it.copy(content = filteredContent, selectedFilter = jokeType)
+        }
+
+        if (filteredContent.isEmpty()) {
+            viewModelScope.launch {
+                _uiEvents.emit(UiEvents.SnackbarEvent("No jokes for given filter!"))
+            }
         }
     }
 
 }
 
 sealed class UiEvents {
-    data class SnackbarEvent(val message: String, val errorSnackbar: Boolean) : UiEvents()
+    data class SnackbarEvent(val message: String) : UiEvents()
 }

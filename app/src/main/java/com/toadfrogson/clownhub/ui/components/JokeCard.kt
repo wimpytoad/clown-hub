@@ -1,20 +1,12 @@
 package com.toadfrogson.clownhub.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +26,7 @@ fun JokeCard(
     data: JokeModel
 ) {
     var isSelected by remember { mutableStateOf(false) }
+
     Card(
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 4.dp)
@@ -49,36 +42,15 @@ fun JokeCard(
                 .fillMaxWidth()
                 .padding(20.dp)
         ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = 12.dp, vertical = 4.dp),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = "Joke №${data.id}",
-                        style = MaterialTheme.typography.labelMedium
-                    )
-                    Text(
-                        text = data.category,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                }
-                IconButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surface)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = MaterialTheme.colorScheme.outline
-                    )
-                }
-            }
+            Text(
+                text = "Joke №${data.id}",
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                text = data.category,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.outline
+            )
 
             Text(
                 text = data.content,
@@ -91,7 +63,7 @@ fun JokeCard(
             AnimatedVisibility(isSelected) {
                 Column {
                     Text(
-                        text = "Metadata of this joke if you are THAT interested: ",
+                        text = "Metadata of this joke if you are that interested: ",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(top = 12.dp, bottom = 8.dp)

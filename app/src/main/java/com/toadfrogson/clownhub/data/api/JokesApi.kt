@@ -14,6 +14,6 @@ class JokesApiImpl(private val client: WebClient) : JokesApi {
 
     companion object {
         private val DEFAULT_JOKE_FILTERS =
-            "Programming,Miscellaneous,Spooky?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10"
+            "Programming,Miscellaneous,Pun,Spooky?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10"
     }
 }

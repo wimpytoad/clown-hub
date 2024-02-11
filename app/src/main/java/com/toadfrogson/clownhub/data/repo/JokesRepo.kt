@@ -26,8 +26,7 @@ class JokesRepoImpl(private val api: JokesApi, private val dbAccessor: DatabaseA
 
         }
 
-        val result = api.fetchJokes()
-        return when (result) {
+        return when (val result = api.fetchJokes()) {
             is ApiResponse.Success -> {
                 if (!result.data.error && result.data.jokes.isNotEmpty()) {
                     val data = result.data.jokes.map { JokeModel.mapFromEntity(it) }

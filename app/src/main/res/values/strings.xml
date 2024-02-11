@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ClownHub</string>
+    <string name="joke_category_all">All</string>
+    <string name="joke_category_miscellaneous">Miscellaneous</string>
+    <string name="joke_category_programming">Programming</string>
+    <string name="joke_category_pun">Pun</string>
+    <string name="joke_category_spooky">Spooky</string>
 </resources>
