@@ -16,7 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toadfrogson.clownhub.R
 import com.toadfrogson.clownhub.data.model.JokeModel
 
 
@@ -43,8 +45,9 @@ fun JokeCard(
                 .padding(20.dp)
         ) {
             Text(
-                text = "Joke №${data.id}",
-                style = MaterialTheme.typography.labelMedium
+                text = stringResource(R.string.joke_number_text, data.id),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.outline
             )
             Text(
                 text = data.category,
@@ -63,7 +66,7 @@ fun JokeCard(
             AnimatedVisibility(isSelected) {
                 Column {
                     Text(
-                        text = "Metadata of this joke if you are that interested: ",
+                        text = stringResource(R.string.joke_metadata_text),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(top = 12.dp, bottom = 8.dp)

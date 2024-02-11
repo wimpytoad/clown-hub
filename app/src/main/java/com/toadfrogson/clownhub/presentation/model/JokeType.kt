@@ -1,4 +1,4 @@
-package com.toadfrogson.clownhub.app.model
+package com.toadfrogson.clownhub.presentation.model
 
 import androidx.annotation.StringRes
 import com.toadfrogson.clownhub.R

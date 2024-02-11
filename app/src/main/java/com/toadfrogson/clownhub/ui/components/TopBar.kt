@@ -24,8 +24,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.toadfrogson.clownhub.app.model.JokesCategoriesList.jokesList
-import com.toadfrogson.clownhub.app.viewmodel.MainViewModel
+import com.toadfrogson.clownhub.presentation.model.JokesCategoriesList.jokesList
+import com.toadfrogson.clownhub.presentation.viewmodel.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

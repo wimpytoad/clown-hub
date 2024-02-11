@@ -1,11 +1,11 @@
-package com.toadfrogson.clownhub.app.viewmodel
+package com.toadfrogson.clownhub.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.toadfrogson.clownhub.app.model.JokeType
 import com.toadfrogson.clownhub.data.model.JokeModel
 import com.toadfrogson.clownhub.data.model.response.ApiResponse
 import com.toadfrogson.clownhub.data.repo.JokesRepo
+import com.toadfrogson.clownhub.presentation.model.JokeType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,7 +49,7 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
                 it.copy(isLoading = false, content = unfilteredContent)
             }
         } else {
-            _uiEvents.emit(UiEvents.SnackbarEvent("Failed to Load"))
+            _uiEvents.emit(UiEvents.ErrorSnackbarEvent)
         }
     }
 
@@ -59,16 +59,10 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
         _uiState.update {
             it.copy(content = filteredContent, selectedFilter = jokeType)
         }
-
-        if (filteredContent.isEmpty()) {
-            viewModelScope.launch {
-                _uiEvents.emit(UiEvents.SnackbarEvent("No jokes for given filter!"))
-            }
-        }
     }
 
 }
 
 sealed class UiEvents {
-    data class SnackbarEvent(val message: String) : UiEvents()
+    data object ErrorSnackbarEvent: UiEvents()
 }
