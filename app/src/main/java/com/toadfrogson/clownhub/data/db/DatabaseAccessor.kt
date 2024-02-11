@@ -12,18 +12,22 @@ interface DatabaseAccessor {
 }
 
 class RealmDatabaseAccessorImpl : DatabaseAccessor {
-    private val config: RealmConfiguration =
-        RealmConfiguration.create(schema = setOf(JokeModel::class))
-    private val realm: Realm = Realm.open(config)
+
 
 
     override fun getCachedJokes(): List<JokeModel> {
-        return realm.query<JokeModel>().find()
+        return RealmConfig.realm.query<JokeModel>().find()
     }
 
     override suspend fun cacheJokes(jokes: List<JokeModel>?) {
-        realm.writeBlocking {
+        RealmConfig.realm.write {
             jokes?.forEach { copyToRealm(it) }
         }
     }
+}
+
+private object RealmConfig {
+    private val config: RealmConfiguration =
+        RealmConfiguration.create(schema = setOf(JokeModel::class))
+    val realm: Realm = Realm.open(config)
 }
