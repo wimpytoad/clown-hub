@@ -66,7 +66,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel(), onThemeSwitched: () -
                     if(state.content.isEmpty()) {
                         Text(
                             modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                            text = "",
+                            text = stringResource(R.string.no_jokes_found_text),
                             style = MaterialTheme.typography.headlineLarge,
                             color = MaterialTheme.colorScheme.tertiary
                         )

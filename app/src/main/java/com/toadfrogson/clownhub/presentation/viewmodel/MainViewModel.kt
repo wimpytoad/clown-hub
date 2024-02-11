@@ -37,7 +37,7 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
         }
     }
 
-    private suspend fun loadContent() {
+    suspend fun loadContent() {
         _uiState.update {
             it.copy(isLoading = true)
         }
@@ -49,20 +49,25 @@ class MainViewModel(private val repo: JokesRepo) : ViewModel() {
                 it.copy(isLoading = false, content = unfilteredContent)
             }
         } else {
+            _uiState.update {
+                it.copy(isLoading = false)
+            }
             _uiEvents.emit(UiEvents.ErrorSnackbarEvent)
         }
     }
 
     fun filterContent(jokeType: JokeType) {
-        val filteredContent = if (jokeType.value.isEmpty()) unfilteredContent
-        else unfilteredContent.filter { it.category == jokeType.value }
-        _uiState.update {
-            it.copy(content = filteredContent, selectedFilter = jokeType)
+        viewModelScope.launch(Dispatchers.IO) {
+            val filteredContent = if (jokeType.value.isEmpty()) unfilteredContent
+            else unfilteredContent.filter { it.category == jokeType.value }
+            _uiState.update {
+                it.copy(content = filteredContent, selectedFilter = jokeType)
+            }
         }
     }
 
 }
 
 sealed class UiEvents {
-    data object ErrorSnackbarEvent: UiEvents()
+    data object ErrorSnackbarEvent : UiEvents()
 }
