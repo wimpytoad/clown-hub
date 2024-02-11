@@ -8,7 +8,6 @@ data class JokesEntity(
     val jokes: List<JokeEntry>,
 )
 
-
 @Serializable
 data class JokeEntry(
     val category: String,

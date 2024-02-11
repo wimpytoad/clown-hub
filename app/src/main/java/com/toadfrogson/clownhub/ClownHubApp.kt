@@ -1,7 +1,7 @@
 package com.toadfrogson.clownhub
 
 import android.app.Application
-import com.toadfrogson.clownhub.app.di.ViewModelModule
+import com.toadfrogson.clownhub.presentation.di.ViewModelModule
 import com.toadfrogson.clownhub.data.di.DataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

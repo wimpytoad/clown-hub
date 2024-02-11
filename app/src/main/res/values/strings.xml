@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ClownHub</string>
+    <string name="joke_category_all">All</string>
+    <string name="joke_category_miscellaneous">Miscellaneous</string>
+    <string name="joke_category_programming">Programming</string>
+    <string name="joke_category_pun">Pun</string>
+    <string name="joke_category_spooky">Spooky</string>
+    <string name="joke_number_text">Joke №%d</string>
+    <string name="joke_metadata_text">Metadata of this joke if you are that interested: </string>
+    <string name="error_snackbar_text">Something went wrong, no jokes for you!</string>
+    <string name="no_jokes_found_text">No jokes found!</string>
 </resources>

@@ -1,6 +1,6 @@
-package com.toadfrogson.clownhub.app.di
+package com.toadfrogson.clownhub.presentation.di
 
-import com.toadfrogson.clownhub.app.viewmodel.MainViewModel
+import com.toadfrogson.clownhub.presentation.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
