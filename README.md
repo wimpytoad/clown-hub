@@ -6,3 +6,11 @@ Higlights: (new stuff for me)
 - Turbine for coroutines testing
 - Material3 dynamic themes (did not enjoy absence of basic elements in Material3, cmon its been two years already!)
 Works for Android 12+ only due to dynamic theming (which usage I wanted to enforce). Change wallpapers to see colors change!
+
+
+TODO:
+- Move dependencies versions away into dedicated Versions file
+- Inject CoroutineDispatcher into repository instead of hardcoding it on VM level
+- Swipe to refresh functionality (Material3 still does not have it!)
+- Setting to clear local cache (RealmDB) and delete items
+- Domain layer if app grows bigger
